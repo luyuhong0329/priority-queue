@@ -1,8 +1,7 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { Modal } from "antd"
-import { popupQueue } from "./PriorityQueue"
 
-export default NiceModal.create(() => {
+export default NiceModal.create(({ onNext }: { onNext?: () => void }) => {
   // Use a hook to manage the modal state
   const modal = useModal()
   return (
@@ -15,7 +14,7 @@ export default NiceModal.create(() => {
       }}
       afterClose={() => {
         modal.remove()
-        popupQueue.next()
+        onNext && onNext()
       }}
     >
       modal2!
